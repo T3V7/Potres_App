@@ -9,8 +9,18 @@
 	</br>
 	</font>
 	<style>
-	input
-	  {
+	.alert2{
+		background-color: transparent;
+	}
+	.alert {
+	   background: #fff6bf url(exclamation.png) 15px center no-repeat;
+	   text-align: left;
+	   padding: 10px 20px 10px 50px;
+	   border-top: 2px solid #ffd324;
+	   border-bottom: 2px solid #ffd324;
+	}
+
+	input {
 	    height:120px;
 		width:280px;
 		font-size: 50px;
@@ -44,7 +54,45 @@
 		border-color:#ffffff #ffffff;
 		height:100px;
 	  }
-	  
+	  #poskodbe{
+		padding:3px;
+		margin: 0;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+		-webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+		-moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+		box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+		background: #f8f8f8;
+		color:#888;
+		border:none;
+		outline:none;
+		display: inline-block;
+		-webkit-appearance:none;
+		-moz-appearance:none;
+		appearance:none;
+		cursor:pointer;
+		font-size: 33px;
+	  }
+	  #legal{
+		margin: 0;
+		text-align: center;
+		font-size: 11px;
+		margin-bottom: 20px;
+		line-height: 2em;
+		padding: 0;
+		display: block;
+		-webkit-margin-before: 1em;
+		-webkit-margin-after: 1em;
+		-webkit-margin-start: 0px;
+		-webkit-margin-end: 0px;
+		color: #757E82;
+		font-family: Tahoma, Geneva, sans-serif;
+	  }
+	  #white {
+		background-color: #ffffff;
+		border-radius:20px/12px;
+	  }
 	</style>
 
 	
@@ -80,13 +128,25 @@
 
     // API-ji naprave so na voljo
     //
+	function myAlert(text,mode){
+		if (mode == 1){
+			document.getElementById("alert").className = "alert2";
+			document.getElementById("alert").innerHTML = "";
+		}
+		else{
+			document.getElementById("alert").className = "alert";
+			document.getElementById("alert").innerHTML = text;
+		}
+	}
+	
+	
     function onDeviceReady() {
 		//ozadje je ponovno nastavljeno na rdečo.
 		//zaženemo funkcijo startWatch.
 		//uporabnika seznanimo z pravili uporabe.
 		//
 		document.bgColor= '#FF0000';
-		alert('Napravo položite na ravno ploskev, ki jo lahko trese le gibanje tal. V spodnje polje napišite občutljivost(med 0.01 in 1)');
+		//alert('Napravo položite na ravno ploskev, ki jo lahko trese le gibanje tal. Najboljša bi bila kakšna velika skala, ampak ni važno. Potem pa v spodnje polje vpišite, koliko menite, da je na zgradbi škode.');
 		startWatch();
 	}
 
@@ -216,33 +276,59 @@
 			else{
 			//če pa je meja prenizka ali previsoka...
 				if(meja < 0.5){
-				alert('Ne vem, če bi bilo dobro imeti lažen alarm zaradi šuma senzorja. Vrednost naj bo med 0.01 in 1g.')
+				myAlert('Prosim, izberite primerno stopnjo poškodbe.', 0)
 				}
 				else{
-				alert('Zakaj bi zaznaval najhujši del potresa osme stopnje po Richterjevi lestvici?! Vrednost naj bo med 0.01 in 1g.')
+				myAlert('Prosim, izberite primerno stopnjo poškodbe.', 0)
 				}
 			}
 		}
 		else{
 		//Če pa občutljivost še ni napisana...
-		alert('Napišite občutljivost v spodnjem polju.')
+		myAlert('Prosim, izberite primerno stopnjo poškodbe.', 0)
 		}
 	}
 	//to se izvede, ko vpišemo vrednost.
-	function izbrano(vnos){
-		meja = vnos*9.81;
-		potresJa = 1;
+	function izbrano(){
+		vnos = document.getElementById('poskodbe').value;
+		if (vnos){
+			console.log(vnos);
+			meja = vnos*9.81;
+			potresJa = 1;
+			back();
+			myAlert('a', 1)
+		}
+		else {
+			myAlert('Prosim, izberite primerno poškodbo zgradbe.', 0);
+		}
 	}
-
     </script>
   </head>
   <body>
     <div id="accelerometer">Waiting for accelerometer...</div>
 	</br>
 	<div align="center">
-		<input type=button value =''  name =reset id =reset onClick =back()></br>
-		<input type=button value =Meja[g]: name=obc1 id=obc1 disabled></br>
-		<input type=number name =obc id=obc onChange =izbrano(this.value)> 
+		<input type=button value =''  name =reset id =reset onClick =izbrano()></br></br>
+	</div>
+	<div id="white" name="white" align="center">
+		</br>
+		<div class="poskodbe">
+			<label></label>
+			<select id="poskodbe" name="poskodbe" required >
+				<option value="">- Izberi Poškodbe -</option>
+				<option value="0.3">Zelo Malo</option>
+				<option value="0.25">Malo</option>
+				<option value="0.2">Srednje</option>
+				<option value="0.15">Veliko</option>
+				<option value="0.1">Zelo Veliko</option>
+			</select>
+		</div>
+		</br>
+		<p class="alert" id="alert" name="alert" >Napravo položite na ravno ploskev, ki jo lahko trese le gibanje tal. Najboljša bi bila kakšna velika skala, ampak ni važno. Potem pa v spodnje polje vpišite, koliko menite, da je na zgradbi škode.</p>
+		</br>
+		<p id="legal" name="legal">
+		Copyright Team [ne:]PREDvidljivi ©2014
+		</p>
 	</div>
   </body>
 </html>
