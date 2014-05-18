@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-    <title>Potresni alarm</title>
+    <title>Aftershocker</title>
 	<div align=center class="white" >
 	<font class="poskodbe">
-	<b>Senzor potresnih</br>in popotresnih</br>sunkov<b>
+	<b>Earthquake and aftershock detector<b>
 	</font>
 	</br>
 	</br>
@@ -291,16 +291,16 @@
 			else{
 			//če pa je meja prenizka ali previsoka...
 				if(meja < 0.5){
-				myAlert('Prosim, izberite primerno stopnjo poškodbe zgradbe.', 0)
+				myAlert('Please select the damage level.', 0)
 				}
 				else{
-				myAlert('Prosim, izberite primerno stopnjo poškodbe zgradbe.', 0)
+				myAlert('Please select the damage level.', 0)
 				}
 			}
 		}
 		else{
 		//Če pa občutljivost še ni napisana...
-		myAlert('Prosim, izberite primerno stopnjo poškodbe zgradbe.', 0)
+		myAlert('Please select the damage level.', 0)
 		}
 	}
 	//to se izvede, ko vpišemo vrednost.
@@ -314,7 +314,7 @@
 			myAlert('a', 1)
 		}
 		else {
-			myAlert('Prosim, izberite primerno stopnjo poškodbe zgradbe.', 0);
+			myAlert('Please select the damage level.', 0);
 		}
 	}
     </script>
@@ -325,25 +325,24 @@
 	<div align="center">
 		<input type=button value =''  name =reset id =reset onClick =izbrano()></br></br>
 	</div>
-	<!--<div id="white" name="white" class="white" align="center">-->
 		</br>
-		<p class="poskodbe">Poškodbe:</p></br></br>
+		<p class="poskodbe">Damage:</p></br></br>
 		<div>
 			<label></label>
 			<select id="poskodbe" name="poskodbe" class="poskodbe" required >
-				<option value="">---Izberi---</option>
-				<option value="0.068">Zelo malo</option>
-				<option value="0.056">Malo</option>
-				<option value="0.044">Srednje</option>
-				<option value="0.032">Veliko</option>
-				<option value="0.02">Zelo veliko</option>
+				<option value="">---Select---</option>
+				<option value="0.068">Just a bit</option>
+				<option value="0.056">Little</option>
+				<option value="0.044">Middle</option>
+				<option value="0.032">A lot</option>
+				<option value="0.02">Very much</option>
 			</select>
 		</div>
 		</br>
-		<p class="alert" id="alert" name="alert" >Napravo položite na ravno ploskev, ki jo lahko trese le gibanje tal. Najboljša bi bila kakšna velika skala, ampak ni važno. Potem pa v spodnje polje vpišite, koliko menite, da je na zgradbi škode.</p>
+		<p class="alert" id="alert" name="alert" >Place the device on straight surface that can be moved only by ground shaking. The best should be a big rock, but it isnt as important as entering the building damage.</p>
 		</br>
 		<p id="legal" name="legal">
-		Copyright Team [ne:]PREDvidljivi ©2014
+		Copyright Team the [un:]PREDictables ©2014
 		</p>
 	</div>
 	<script type="text/javascript">
